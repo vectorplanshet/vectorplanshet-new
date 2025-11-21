@@ -1155,10 +1155,17 @@ updateOverlayFilter();
     } else if (speed >= 1110 && speed <= 1111) {
         iconUrl = 'mirage.png';
         iconClass = 'blue-id';  
+    } else if (speed >= 300 && speed <= 301) {
+        iconUrl = 'bplaper.png';
+        iconClass = 'perexop'
+    } else if (speed >= 230 && speed <= 250) {
+        iconUrl = 'vertolet.png';
+        iconClass = 'vertolet'
     } else {
         // Если скорость не попала ни в одно условие, ставим "neyst tip.png"
         iconUrl = 'neyst tip.png';
     }
+          const objectId2 = getNextObjectIdBlue();
   if (iconUrl === 'litak.png') {
   const objectId3 = getNextLitakId();
   iconHtml = `
@@ -1171,7 +1178,12 @@ updateOverlayFilter();
       </div>
     </div>
   `;
-Ы
+          icon = L.divIcon({
+        className: 'icon',
+        html: iconHtml,
+        iconSize: [6.5, 6.5], // общий размер
+        iconAnchor: [10, 10],
+    });
 } else if (iconClass === 'kr') {
       iconUrl = 'kalibr.png';
       iconClass = 'red-id';
@@ -1200,7 +1212,7 @@ updateOverlayFilter();
             <img src="${iconUrl}" class="icon" />
             <div class="info-container ${shiftedClass} ${shiftedClasss}">
                 <span class="label-container ${iconClass}">0${objectId2}р</span>
-                <span class="r-container ${iconClass}">ЗЛ</span>
+                <span class="r-container ${iconClass}">ЗЛ·</span>
             </div>
         </div>
     `;
@@ -1219,7 +1231,7 @@ updateOverlayFilter();
       <img src="${iconUrl}" class="icon" />
       <div class="info-container ${shiftedClass} ${shiftedClasss}">
         <span class="label-container ${iconClass}">0${objectId2}р</span>
-        <span class="r-container ${iconClass}">СВ</span>
+        <span class="r-container ${iconClass}">СВ·</span>
       </div>
     </div>
   `;
@@ -1228,6 +1240,41 @@ updateOverlayFilter();
         html: iconHtml,
         iconSize: [6.5, 6.5], // общий размер
         iconAnchor: [10, 10],
+    });
+    } else if (iconClass === 'vertolet') {
+          iconClass = 'blue-id';
+  iconHtml = `
+    <div class="icon-container ${iconClass}">
+                 <div class="line"></div>
+      <img src="${iconUrl}" class="icon" />
+      <div class="info-container ${shiftedClass} ${shiftedClasss}">
+        <span class="label-container ${iconClass}">0${objectId2}р</span>
+        <span class="r-container ${iconClass}">СВ·</span>
+      </div>
+    </div>
+  `;
+        icon = L.divIcon({
+        className: 'icon',
+        html: iconHtml,
+        iconSize: [28.8, 28.8], // общий размер
+        iconAnchor: [14.4, 14.4],
+    });
+} else if (iconClass === 'perexop') {
+    iconHtml = `
+        <div class="icon-container ${iconClass}">
+                     <div class="line"></div>
+            <img src="${iconUrl}" class="icon" />
+            <div class="info-container ${shiftedClass} ${shiftedClasss}">
+                <span class="label-container ${iconClass}">0${objectId2}р</span>
+                <span class="r-container ${iconClass}">ЗЛ·</span>
+            </div>
+        </div>
+    `;
+        icon = L.divIcon({
+        className: 'icon',
+        html: iconHtml,
+        iconSize: [28.8, 28.8], // общий размер
+        iconAnchor: [14.4, 14.4],
     });
 } else {
     const iconTypes = {
@@ -1799,6 +1846,7 @@ fetch("front.json")
     return new Intl.DateTimeFormat('ru-RU', options).format(new Date());
 }
 
+
 let objectIdCounter = 44000;
 
 function getNextObjectId() {
@@ -1816,7 +1864,7 @@ function getNextObjectId() {
     `;
     return iconHTML;
 }
-let objectIdCounterBlue = '0750';
+let objectIdCounterBlue = '0570';
 
 function getNextObjectIdBlue() {
   return objectIdCounterBlue++;
